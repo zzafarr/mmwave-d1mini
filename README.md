@@ -3,6 +3,8 @@ This is a step by step guide on how to build an mmWave presence detection using 
 
 The custom module in the code above is used to implement a room presense sensor and exposes the presense detection sensor and the radar's configuration variables to Home Assistant via the ESPHome integration.
 
+For a more advanced multi-sensor, including temperature, humidity, air quality and air pressure refer to my project here: https://github.com/igiannakas/Presense-Temperature-Humidity-Air-Quality-multi-sensor-DFRobot-SHT35-or-BME680-
+
 This is based on the excellent work done by CRlogic in the HA forums and documented here: https://github.com/hjmcnew/esphome-hs2xx3a-custom-component/tree/release
 
 In this fork of the code, the code is adapted to:
@@ -14,14 +16,13 @@ In this fork of the code, the code is adapted to:
 
 # Bill of Materials:
 To make this DIY room presense sensor you'll need the below components:
-1. D1 Mini (~£3)
-2. DFRobot SEN0395 (from Digi Key, Mouser, Arrow.com, Farnell.com, AliExpress) (~£32)
-3. Mini USB cable and a USB power supply (I use my old phone chargers) (~£5)
+1. D1 Mini
+2. DFRobot SEN0395 (from Digi Key, Mouser, Arrow.com, Farnell.com, AliExpress)
+3. Mini USB cable and a USB power supply (I use my old phone chargers)
 4. Soldering iron
 5. 5 cm / 2 inch of wire
-6. Optional: 3d printed case
+6. Optional: 3d printed case (either the one in the folder above or the slightly larger case I've published here if you are using an ESP32 Mini: https://www.printables.com/model/520547-esp32-temperature-and-optional-mmwave-radar-presen)
 
-Total Cost: £40
 
 # Wiring instructions:
 To get the smallest possible size we stack the sensor on top of the D1 Mini using the pins that come with the D1 mini. The wiring diagram below reflects a stacked configuration:
@@ -91,9 +92,13 @@ The sensor distance, latency, mmwave_sensor, sensitivity values are read from th
 Every time you change a value you need to wait ~15 - 20 seconds for the value to be written to the DFRobot radar sensor memory and for the radar to restart. While the D1 mini is writing the values to the radar's memory you'll see the LED light turn red. Once it starts blinking or is off (depending on your settings) the values are now written in memory and are persistent through reboots. 
 
 # Sensor case
-I've designed a basic case for the sensor which should provide a snug fit to its components. The STL file is included in the respository above. Please note that I dont have a 3d printer and as of 10th October 2022 I am awaiting for my printed samples to arrive, so I have not tested fit and finish.
+I've designed a basic case for the sensor which should provide a snug fit to its components. The STL file is included in the respository above. The case has been tested with the D1 mini and the above sensor and also with a D1 mini and an LD2410 mmwave sensor.
 
-![Case](project-images/case.jpeg "Case")
+There are two linds in the file - a tight and a loose fitting one. Depending on your 3d Printer tolerance print one of the two lids to allow for friction fit.
+
+![Case](project-images/Case-new.jpeg "Case")
+
+![Case](project-images/Case-2.jpeg "Case")
 
 # Troubleshooting
 What I have found is that the sensor is very sensitive to motion (which is what you want in order to get room presense). However, that might lead to false positives, when for example, you have a window open and objects move. 
